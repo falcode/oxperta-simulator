@@ -1,0 +1,20 @@
+@use './../utils' as *;
+@use './../sizings' as *;
+
+.mat-menu-panel {
+  max-width: $menu-panel-width !important;
+  border-radius: 1rem !important;
+  box-shadow: $box-shadow-container-soft;
+
+  &--navbar {
+
+    $menu-item-height: 2.75rem;
+
+    button.mat-menu-item {
+      height: $menu-item-height;
+      line-height: $menu-item-height;
+      min-width: $menu-panel-width;
+    }
+
+  }
+}

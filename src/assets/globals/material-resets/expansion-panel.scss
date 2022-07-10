@@ -1,0 +1,21 @@
+.mat-expansion-panel {
+  background: transparent !important;
+
+  &.prevent-default {
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+
+    .mat-expansion-panel-header {
+      height: unset !important;
+      padding: 0;
+
+      .mat-content {
+      }
+    }
+
+    .mat-expansion-panel-body {
+      padding: 0;
+    }
+  }
+}

@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'assets/globals/material' as *;
+@use 'assets/globals/resets' as *;
+@use 'assets/globals/typography' as *;
+@use 'assets/globals/colors' as *;
+@use 'assets/globals/spacings' as *;
+@use 'assets/globals/utils' as *;
+@use 'assets/globals/grid' as *;
+@use 'assets/globals/animations' as *;
+@use 'assets/globals/components' as *;
+
+html, body {
+  font-family: $refy-font, "Helvetica Neue", sans-serif !important;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+
+  &.prevent-scroll {
+
+    body {
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+  }
+}
+

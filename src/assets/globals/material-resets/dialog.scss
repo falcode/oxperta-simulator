@@ -1,0 +1,11 @@
+@use './../sizings' as *;
+
+.cdk-overlay-container {
+  z-index: 1200;
+}
+
+.mat-dialog-container {
+  padding: 0 !important;
+  border-radius: 1rem !important;
+  max-width: $mobile-breakpoint;
+}

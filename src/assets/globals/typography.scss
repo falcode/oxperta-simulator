@@ -1,0 +1,632 @@
+@import './fonts';
+@import './colors';
+@import './sizings';
+
+$refy-font: NexaText;
+$refy-public-font: FiraSans;
+
+.underline {
+  text-decoration: underline;
+}
+
+.font {
+
+  &-public {
+    * {
+      font-family: $refy-public-font !important;
+    }
+  }
+
+  &-bold {
+    font-weight: $font-bold !important;
+  }
+
+  &-normal {
+    font-weight: $font-normal !important;
+  }
+
+  &-line-through {
+    text-decoration: line-through;
+  }
+
+  &-shadow {
+    text-shadow: 1px 1px 2px $refy-grey-900;
+  }
+
+  &-big-title {
+    font-weight: $font-bold;
+    font-size: 32px;
+    line-height: 3rem;
+    color: $refy-blue;
+
+    &--46 {
+      font-size: 46px;
+      line-height: 3.5rem;
+    }
+
+    &--40 {
+      font-size: 40px;
+    }
+
+    &--26 {
+      font-size: 26px;
+      line-height: 2.25rem;
+    }
+  }
+
+  &-title {
+    font-weight: $font-medium;
+    font-size: 20px;
+    line-height: 2rem;
+    color: $refy-blue;
+
+    &--breadcrumb {
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 1.5rem;
+      color: $refy-grey-1000;
+    }
+
+    &--tab {
+      font-size: 16px;
+      color: $refy-grey-1000;
+    }
+
+    &--menu-panel {
+      font-size: 15px;
+      font-weight: bold;
+      color: $refy-text-contrast-grey;
+    }
+
+  }
+
+  &-small-title {
+    font-weight: $font-medium;
+    font-size: 18px;
+    line-height: 2rem;
+    color: $refy-blue;
+  }
+
+  &-table {
+
+    &--title {
+      font-size: 16px;
+      font-weight: normal;
+      color: $refy-blue;
+    }
+
+    &--subtitle {
+      font-size: 15px;
+      font-weight: normal;
+      color: $refy-grey-1000;
+    }
+
+  }
+
+  &-subtitle {
+    font-weight: $font-medium;
+    font-size: 18px;
+    line-height: 2rem;
+    color: $refy-text-grey;
+
+    &--light {
+      color: $refy-white;
+    }
+
+    &--breadcrumb {
+      font-weight: $font-medium;
+      font-size: 15px;
+      color: $refy-text-grey;
+    }
+  }
+
+  &-header {
+    font-weight: $font-medium;
+    font-size: 16px;
+    line-height: 1.5rem;
+    color: $refy-grey-900;
+  }
+
+  &-button {
+    font-family: $refy-font;
+  }
+
+  &-hint {
+    font-size: 14px;
+    line-height: 1.5rem;
+    color: $refy-text-grey;
+
+    &--error {
+      color: $refy-color-danger;
+    }
+  }
+
+  &-value {
+    font-size: 13px;
+    line-height: 1rem;
+    color: $refy-text-grey;
+  }
+
+  &-multiline {
+    font-size: 15px;
+    line-height: 1.5rem;
+    color: $refy-text-grey;
+    overflow-wrap: break-word;
+    white-space: break-spaces;
+
+    &--2 {
+      min-height: 1.5rem * 2;
+    }
+
+    span {
+      color: $refy-blue;
+      font-weight: $font-bold;
+    }
+  }
+
+  &-prose {
+    font-size: 20px;
+    line-height: 2rem;
+    font-weight: $font-normal;
+    color: $refy-grey-900;
+    overflow-wrap: break-word;
+    white-space: normal;
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    strong {
+      font-size: 24px;
+      line-height: 2.5rem;
+      color: $refy-grey-1000;
+      font-weight: $font-bold;
+    }
+
+    ul {
+      list-style-type: disc;
+      padding-left: 1.625rem;
+      margin-block-start: 0;
+      margin-block-end: 0;
+
+      li {
+        padding-left: 0.375rem;
+        margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
+
+        &:last-of-type {
+          margin-bottom: 1.5rem;
+        }
+      }
+    }
+
+    @media (max-width: $mobile-breakpoint) {
+      font-size: 19px;
+
+      strong {
+        font-size: 22px;
+      }
+
+    }
+
+    &--condensed {
+      font-size: 16px;
+
+      strong {
+        font-size: 18px;
+      }
+
+    }
+
+  }
+
+  &-badge {
+    font-weight: $font-medium;
+    font-size: 14px;
+    line-height: 1.5rem;
+
+    &--condensed {
+      font-size: 12px;
+      line-height: 1.25rem;
+    }
+
+    &--primary {
+      color: $refy-color-primary;
+    }
+
+    &--white {
+      color: $refy-white;
+    }
+
+    &--black {
+      color: $refy-black;
+    }
+
+    &--dark {
+      color: $refy-grey-1000;
+    }
+
+    &--grey {
+      color: $refy-grey;
+    }
+
+    &--contrast-grey {
+      color: $refy-text-contrast-grey;
+    }
+
+    &--red {
+      color: $refy-red;
+    }
+  }
+
+  &-nav-title {
+    transition: color 300ms ease-in-out;
+
+    @media (max-width: $mobile-breakpoint) {
+      font-size: 10px;
+      line-height: 1.25rem;
+      color: $refy-grey;
+
+      &--active {
+        font-weight: $font-medium;
+        color: $refy-grey-1000;
+      }
+    }
+
+    @media (min-width: $mobile-breakpoint) {
+      font-size: 16px;
+      font-weight: $font-normal;
+      color: $refy-grey;
+
+      &--active {
+        color: $refy-grey-1000;
+      }
+    }
+  }
+
+  &-footer {
+
+    &-title {
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 2.25rem;
+      color: $refy-grey-1000;
+    }
+
+    &-link {
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 2.25rem;
+      color: $refy-text-contrast-grey !important;
+      cursor: pointer;
+
+      &:hover, &:active {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &-app-logo {
+    font-size: 24px;
+    font-weight: $font-medium;
+    color: $refy-color-primary;
+  }
+
+  &--white {
+    color: $refy-white;
+  }
+
+  &--black {
+    color: $refy-black;
+  }
+
+  &--dark {
+    color: $refy-grey-1000;
+  }
+
+  &--grey {
+    color: $refy-grey-300;
+  }
+
+  &--red {
+    color: $refy-red;
+  }
+
+  &--ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    * {
+      white-space: inherit;
+      overflow: inherit;
+      text-overflow: inherit;
+    }
+  }
+
+}
+
+.icon-font {
+  font-size: 1rem;
+  color: $refy-grey-1000;
+
+  &--breadcrumb {
+    font-size: 1rem;
+
+    &-white {
+      color: $refy-white;
+    }
+
+    &-filled-heart {
+      color: $refy-color-primary !important;
+
+      &:not(.prevent-animation) {
+        animation: bounce-in 300ms ease;
+      }
+    }
+
+    &-empty-heart {
+      &:not(.prevent-animation) {
+        animation: bounce-out 300ms ease;
+      }
+    }
+
+    @keyframes bounce-in {
+      0% {
+        transform: scale(0.8);
+      }
+      80% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes bounce-out {
+      0% {
+        transform: scale(0.8);
+      }
+      80% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  }
+
+  &--breadcrumb-button {
+    font-size: 1rem;
+    color: $refy-grey-300;
+  }
+
+  &--bottom-sheet-header {
+    font-size: 1rem;
+  }
+
+  &--social {
+    color: $refy-grey;
+    font-size: 2rem;
+
+    &-small {
+      color: $refy-grey;
+      font-size: 1.25rem;
+    }
+  }
+
+  &--candidate-navbar {
+    font-size: 1.25rem;
+  }
+
+  &--navbar {
+    color: $refy-grey;
+    transition: color 300ms ease-in-out;
+
+    &--active {
+      color: $refy-color-primary;
+    }
+
+    @media (max-width: $mobile-breakpoint) {
+      font-size: 1.25rem;
+      height: 1.5rem;
+      align-items: flex-end;
+    }
+
+    @media (min-width: $mobile-breakpoint) {
+      font-size: 1.5rem;
+      height: 1.5rem;
+    }
+
+  }
+
+  &--field-button {
+    font-size: 1rem;
+    color: $refy-grey;
+  }
+
+  &--logo-company {
+    font-size: 1rem;
+    color: $refy-white;
+  }
+
+  &--verified {
+    font-size: 0.7rem;
+    color: $refy-white;
+  }
+
+  &--tiny {
+    font-size: 0.5rem;
+  }
+
+  &--check {
+    font-size: 2.5rem;
+    color: $refy-white;
+  }
+
+  &--score {
+    font-size: 1rem;
+    color: $refy-gold;
+  }
+
+  &--social {
+    font-size: 1.75rem;
+    color: $refy-grey;
+  }
+
+  &--searchbar-find {
+    font-size: 1.25rem;
+    color: $refy-blue;
+  }
+
+  &--job-searchbar {
+    font-size: 0.85rem;
+  }
+
+  &--empty-list {
+    font-size: 3rem;
+    color: $refy-grey;
+  }
+
+  &--help-column {
+    font-size: 2rem;
+    color: $refy-color-primary;
+  }
+
+  &--light {
+    color: $refy-white;
+  }
+
+  &--green {
+    color: $refy-green;
+  }
+
+  &--red {
+    color: $refy-red;
+  }
+
+  &--orange {
+    color: $refy-orange;
+  }
+
+  &--grey-300 {
+    color: $refy-grey-300;
+  }
+
+  &--grey {
+    color: $refy-grey;
+  }
+
+  &--blue {
+    color: $refy-blue;
+  }
+
+  &--plus {
+    font-size: 0.9rem;
+    color: $refy-grey;
+  }
+
+  &--option {
+    font-size: 1.25rem;
+  }
+
+  &--primary {
+    color: $refy-color-primary;
+  }
+
+  &--social {
+
+    &-linkedin {
+      color: $linkedin-color;
+    }
+
+    &-twitter {
+      color: $twitter-color;
+    }
+
+    &-instagram {
+      color: $instagram-color;
+    }
+
+    &-facebook {
+      color: $facebook-color;
+    }
+
+    &-whatsapp {
+      color: $whatsapp-color;
+    }
+
+    &-slack {
+      color: $slack-color;
+    }
+
+    &-microsoft {
+      color: $microsoft-color;
+    }
+
+  }
+
+}
+
+.button {
+  &-font--20 {
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  &-font--18 {
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  &-font--17 {
+    font-weight: bold;
+    font-size: 17px;
+  }
+
+  &-font--15 {
+    font-weight: bold;
+    font-size: 15px;
+  }
+
+  &-font--13 {
+    font-size: 13px;
+  }
+
+  &--primary {
+    color: $refy-color-primary;
+  }
+
+  &--light {
+    color: $refy-white;
+  }
+
+  &--grey {
+    color: $refy-text-grey;
+  }
+
+  &--dark-grey {
+    color: $refy-text-contrast-grey;
+  }
+
+  &--dark {
+    color: $refy-grey-1000;
+  }
+
+  &--green {
+    color: $refy-green;
+  }
+
+  &--danger {
+    color: $refy-red;
+  }
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  &:not(.font-selectable) {
+    /*-webkit-user-select: none; /* Safari */
+    /*-moz-user-select: none; /* Firefox */
+    /*-ms-user-select: none; /* IE10+/Edge */
+    /*user-select: none; /* Standard */
+  }
+}

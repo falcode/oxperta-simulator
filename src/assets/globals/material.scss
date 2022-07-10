@@ -1,0 +1,16 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@angular/material/theming';
+@import 'src/assets/globals/material-resets/menu-panel.scss';
+@import 'src/assets/globals/material-resets/fields.scss';
+@import 'src/assets/globals/material-resets/snackbar.scss';
+@import 'src/assets/globals/material-resets/expansion-panel.scss';
+@import 'src/assets/globals/material-resets/dialog.scss';
+@import 'src/assets/globals/material-resets/slide-toggle.scss';
+@import 'src/assets/globals/material-resets/tooltip.scss';
+@import 'src/assets/globals/material-resets/button-toggle.scss';
+
+$custom-typography: mat-typography-config(
+  $font-family: NexaText
+);
+
+@include angular-material-typography($custom-typography);
