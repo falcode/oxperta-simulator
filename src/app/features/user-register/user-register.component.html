@@ -1,1 +1,28 @@
-<p>user-register works!</p>
+<form [formGroup]="formGroup" class="flex flex-column pr-10 pl-10">
+  <mat-form-field class="mid-width">
+    <p class="mat-form-field-title font-hint">Nombre y apellidos</p>
+    <input formControlName="name" matInput placeholder="Ej: Maria Garcia Correa">
+    <mat-error>Este campo es requerido</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="mid-width">
+    <p class="mat-form-field-title font-hint">E-mail</p>
+    <input formControlName="email" matInput placeholder="Ej: mariagc@gmail.com">
+    <mat-error>Este campo es requerido</mat-error>
+    <mat-error>Formato de correo erroneo</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="mid-width">
+    <p class="mat-form-field-title font-hint">Teléfono</p>
+    <span matPrefix>+34</span>
+    <input class="prefixed" formControlName="phone" matInput placeholder="Ej: Maria Garcia Correa">
+    <mat-error>Este campo es requerido</mat-error>
+  </mat-form-field>
+
+  <mat-checkbox class="my-1" formControlName="terms">He leído y acepto la
+    <a href="https://express.oxperta.com/aviso-legal?hsLang=es-es" target="_blank" class="underline">política de privacidad</a>
+  </mat-checkbox>
+
+  <mat-checkbox class="my-1" formControlName="publicity">Acepto recibir comunicaciones comerciales</mat-checkbox>
+
+</form>

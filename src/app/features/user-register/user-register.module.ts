@@ -5,6 +5,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NgxMaskModule } from 'ngx-mask';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -18,6 +19,7 @@ import { NgxMaskModule } from 'ngx-mask';
     MatInputModule,
     NgxMaskModule.forChild(),
     MatCheckboxModule,
+    ReactiveFormsModule,
   ],
   exports: [
     UserRegisterComponent

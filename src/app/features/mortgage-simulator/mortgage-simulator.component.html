@@ -1,8 +1,7 @@
-<form [formGroup]="formGroup" class="flex flex-column pr-10 pl-10">
+<form [formGroup]="formGroup" class="flex flex-column px-10 pt-10">
   <mat-form-field class="mid-width" appearance="fill">
     <p class="mat-form-field-title font-hint">Provincia</p>
     <input type="text"
-           placeholder="Ej: Albacete"
            matInput
            formControlName="provinces"
            [matAutocomplete]="auto">
@@ -58,4 +57,4 @@
 
 </form>
 
-<app-user-register></app-user-register>
+<app-user-register *ngIf="false"></app-user-register>

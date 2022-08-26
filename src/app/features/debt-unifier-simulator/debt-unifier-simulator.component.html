@@ -1,1 +1,89 @@
-<p>debt-unifier-simulator works!</p>
+<form [formGroup]="formGroup" class="flex flex-column px-10 pt-10">
+  <div class="flex flex-column" *ngIf="actualStep === 1">
+    <mat-form-field class="mid-width">
+      <p class="mat-form-field-title font-hint">¿Cuánto te queda por pagar de hipoteca?</p>
+      <input formControlName="leftMortgage" matInput mask="separator" thousandSeparator=".">
+      <span matSuffix>€</span>
+      <mat-error>Este campo es requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="mid-width">
+      <p class="mat-form-field-title font-hint">¿Cuánto pagas al mes de hipoteca?</p>
+      <input formControlName="monthlyMortgage" matInput mask="separator" thousandSeparator=".">
+      <span matSuffix>€</span>
+      <mat-error>Este campo es requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="mid-width">
+      <p class="mat-form-field-title font-hint">¿Cuál es el valor de tu vivienda?</p>
+      <input formControlName="totalMortgage" matInput mask="separator" thousandSeparator=".">
+      <span matSuffix>€</span>
+      <mat-error>Este campo es requerido</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="flex flex-column" *ngIf="actualStep === 2">
+    <mat-form-field class="mid-width">
+      <p class="mat-form-field-title font-hint">¿Cuánto te queda por pagar de otros préstamos?</p>
+      <input formControlName="leftDebts" matInput mask="separator" thousandSeparator=".">
+      <span matSuffix>€</span>
+      <mat-error>Este campo es requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="mid-width">
+      <p class="mat-form-field-title font-hint">¿Cuánto pagas al mes de otros préstamos?</p>
+      <input formControlName="monthlyDebts" matInput mask="separator" thousandSeparator=".">
+      <span matSuffix>€</span>
+      <mat-error>Este campo es requerido</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="flex flex-column" *ngIf="actualStep === 3">
+    <mat-form-field class="mid-width">
+      <p class="mat-form-field-title font-hint">Edad del titular</p>
+      <input formControlName="age" matInput type="number">
+      <span matSuffix>años</span>
+      <mat-error>Este campo es requerido</mat-error>
+      <mat-error>Edad máxima 99</mat-error>
+      <mat-error>Edad mínima 18</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="mid-width">
+      <p class="mat-form-field-title font-hint">Ingresos mensuales netos de la unidad familiar</p>
+      <input formControlName="monthlyEarnings" matInput mask="separator" thousandSeparator=".">
+      <span matSuffix>€</span>
+      <mat-error>Este campo es requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="mid-width">
+      <p class="mat-form-field-title font-hint">Nº de pagas al año</p>
+      <input formControlName="numberOfPays" matInput type="number">
+      <mat-error>Este campo es requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="mid-width" appearance="fill">
+      <p class="mat-form-field-title font-hint">Tipo de Contrato</p>
+      <input type="text"
+             matInput
+             formControlName="contractType"
+             [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let contractType of filteredContractType | async" [value]="contractType">
+          {{contractType}}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error>Este campo es requerido</mat-error>
+    </mat-form-field>
+  </div>
+</form>
+
+<div class="flex flex-column" *ngIf="actualStep === 4">
+  <ng-container [ngSwitch]="viability">
+    <ng-container *ngSwitchCase="operationViability.Viable">Viable</ng-container>
+    <ng-container *ngSwitchCase="operationViability.Complex">Complex</ng-container>
+    <ng-container *ngSwitchCase="operationViability.Impossible">Impossible</ng-container>
+  </ng-container>
+</div>
+
+<button *ngIf="actualStep >= 2" (click)="stepBack()">Anterior</button>
+<button *ngIf="actualStep < 4" (click)="stepForward()">Siguiente</button>
