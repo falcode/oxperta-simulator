@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators } from '@angular/forms';
 import {map, Observable, startWith, Subject, takeUntil} from 'rxjs';
+import { EuriborService } from 'src/app/api/services/euribor.service';
 import { Provinces } from '../../shared/consts/provinces';
 enum typeOfInterest {
   Fijo = 'Fijo',
@@ -22,13 +23,13 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
 
   private destroyed$ = new Subject<void>();
 
-  constructor() { }
+  constructor(private euriborService: EuriborService) { }
 
-  ngOnInit(): void {
-    this.initForm();
+  async ngOnInit(): Promise<void> {
+    await this.initForm();
   }
 
-  initForm(): void {
+  async initForm(): Promise<void> {
     const controls = {
       provinces: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required]),
@@ -38,6 +39,7 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
       interest: new FormControl(this.minFixInterest, [Validators.required]),
     };
     this.formGroup = new FormGroup(controls);
+    this.minVariableInterest = await this.euriborService.setEuribor();
     this.filterProvincesListener();
     this.changeInterestListener();
   }

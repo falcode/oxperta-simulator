@@ -75,15 +75,21 @@
       <mat-error>Este campo es requerido</mat-error>
     </mat-form-field>
   </div>
+
+  <div class="flex flex-column" *ngIf="actualStep === 4">
+    <ng-container [ngSwitch]="viability">
+      <ng-container *ngSwitchCase="operationViability.Viable">Viable</ng-container>
+      <ng-container *ngSwitchCase="operationViability.Complex">Complex</ng-container>
+      <ng-container *ngSwitchCase="operationViability.Impossible">Impossible</ng-container>
+    </ng-container>
+  </div>
+
+  <div class="flex">
+    <button *ngIf="actualStep >= 2" (click)="stepBack()">Anterior</button>
+    <button *ngIf="actualStep < 4" (click)="stepForward()">Siguiente</button>
+  </div>
+
+
 </form>
 
-<div class="flex flex-column" *ngIf="actualStep === 4">
-  <ng-container [ngSwitch]="viability">
-    <ng-container *ngSwitchCase="operationViability.Viable">Viable</ng-container>
-    <ng-container *ngSwitchCase="operationViability.Complex">Complex</ng-container>
-    <ng-container *ngSwitchCase="operationViability.Impossible">Impossible</ng-container>
-  </ng-container>
-</div>
 
-<button *ngIf="actualStep >= 2" (click)="stepBack()">Anterior</button>
-<button *ngIf="actualStep < 4" (click)="stepForward()">Siguiente</button>

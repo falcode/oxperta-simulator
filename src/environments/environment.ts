@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  euribor: 'https://interest-rate-by-api-ninjas.p.rapidapi.com/v1/interestrate?rapidapi-key=e7678d365emshbcfe3d4c402c3b3p1a0d9djsn1b0db02c4617',
+  lead: 'https://papa.asmalljob.com/webhook/e6529a18-c70c-4b80-b3c5-993618f111ceLeads'
 };
 
 /*
