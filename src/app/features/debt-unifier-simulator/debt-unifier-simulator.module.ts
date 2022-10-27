@@ -8,6 +8,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatInputModule} from "@angular/material/input";
 import {NgxMaskModule} from "ngx-mask";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import { UserRegisterModule } from '../user-register/user-register.module';
 
 
 
@@ -23,7 +24,8 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
     MatCheckboxModule,
     MatInputModule,
     NgxMaskModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    UserRegisterModule,
   ],
   exports: [
     DebtUnifierSimulatorComponent

@@ -1,5 +1,6 @@
-<form [formGroup]="formGroup" class="flex flex-column px-10 pt-10">
-  <mat-form-field class="mid-width" appearance="fill">
+<div class="flex w-full desktop:flex-row mobile:flex-col pt-10 space-x-5 px-5">
+<form [formGroup]="formGroup" class="flex desktop:w-1/2 mobile:w-full flex-column">
+  <mat-form-field appearance="fill">
     <p class="mat-form-field-title font-hint">Provincia</p>
     <input type="text"
            matInput
@@ -14,21 +15,21 @@
   </mat-form-field>
 
 
-  <mat-form-field class="mid-width">
+  <mat-form-field >
     <p class="mat-form-field-title font-hint">Precio del inmueble</p>
     <input formControlName="price" matInput mask="separator" thousandSeparator="." placeholder="Ej: 150.000€">
     <span matSuffix>€</span>
     <mat-error>Este campo es requerido</mat-error>
   </mat-form-field>
 
-  <mat-form-field class="mid-width">
+  <mat-form-field >
     <p class="mat-form-field-title font-hint">Ahorro aportado</p>
     <input formControlName="savings" matInput mask="separator" thousandSeparator="." placeholder="Ej: 40.000€">
     <span matSuffix>€</span>
     <mat-error>Este campo es requerido</mat-error>
   </mat-form-field>
 
-  <mat-form-field class="mid-width">
+  <mat-form-field >
     <p class="mat-form-field-title font-hint">Años de hipoteca</p>
     <input formControlName="years" matInput min="10" max="40" type="number">
     <span matSuffix>años</span>
@@ -38,7 +39,7 @@
   </mat-form-field>
 
   <div>
-    <mat-form-field class="half-mid-width border-radius-right-none">
+    <mat-form-field class="mid-width border-radius-right-none">
       <p class="mat-form-field-title font-hint">Tipo de interés</p>
       <mat-select formControlName="typeOfInterest">
         <mat-option [value]="typeOfInterest.Fijo">{{typeOfInterest.Fijo}}</mat-option>
@@ -47,7 +48,7 @@
       <mat-error>Este campo es requerido</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="half-mid-width border-radius-left-none">
+    <mat-form-field class="mid-width border-radius-left-none">
       <p class="mat-form-field-title font-hint">Tasa de interés anual</p>
       <input formControlName="interest" matInput type="number" (focusout)="checkInterest()">
       <span matSuffix>%</span>
@@ -57,4 +58,5 @@
 
 </form>
 
-<app-user-register *ngIf="false"></app-user-register>
+<app-user-register class="w-1/2" *ngIf="viability"></app-user-register>
+</div>

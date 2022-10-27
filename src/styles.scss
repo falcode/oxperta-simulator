@@ -8,6 +8,10 @@
 @use 'assets/globals/animations' as *;
 @use 'assets/globals/components' as *;
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html, body {
   font-family: $refy-font, "Helvetica Neue", sans-serif !important;
   margin: 0;

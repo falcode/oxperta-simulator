@@ -17,7 +17,7 @@ export class DebtUnifierSimulatorComponent implements OnInit {
   filteredContractType: Observable<string[]>;
   actualStep = 1;
   operationViability = operationViability;
-  viability;
+  viability = operationViability.Impossible;
   constructor() { }
 
   ngOnInit(): void {

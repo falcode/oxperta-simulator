@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators } from '@angular/forms';
-import {map, Observable, startWith, Subject, takeUntil} from 'rxjs';
+import { map, Observable, startWith, Subject, takeUntil} from 'rxjs';
 import { EuriborService } from 'src/app/api/services/euribor.service';
 import { Provinces } from '../../shared/consts/provinces';
 enum typeOfInterest {
@@ -20,6 +20,7 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
   typeOfInterest = typeOfInterest;
   minFixInterest = 1.15;
   minVariableInterest = 0.45;
+  viability = false;
 
   private destroyed$ = new Subject<void>();
 
@@ -39,9 +40,10 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
       interest: new FormControl(this.minFixInterest, [Validators.required]),
     };
     this.formGroup = new FormGroup(controls);
-    this.minVariableInterest = await this.euriborService.setEuribor();
+    this.minVariableInterest += await this.euriborService.setEuribor();
     this.filterProvincesListener();
     this.changeInterestListener();
+    this.listenValidation();
   }
 
   private filterProvincesListener(): void {
@@ -62,6 +64,11 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
         console.log(typeOfInterest);
         this.formGroup.controls.interest.setValue(typeOfInterest === this.typeOfInterest.Fijo ? this.minFixInterest : this.minVariableInterest, {emitEvent: false} )
       });
+  }
+
+  private listenValidation(): void {
+    this.formGroup.valueChanges.pipe(takeUntil(this.destroyed$))
+    .subscribe(_ => this.viability = this.formGroup.valid);
   }
 
   checkInterest(): void {
