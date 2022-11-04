@@ -21,6 +21,8 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
   minFixInterest = 1.15;
   minVariableInterest = 0.45;
   viability = false;
+  monthly: number = 0;
+  total: number = 0;
 
   private destroyed$ = new Subject<void>();
 
@@ -61,14 +63,22 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
   private changeInterestListener(): void {
     this.formGroup.controls.typeOfInterest.valueChanges.pipe(takeUntil(this.destroyed$))
       .subscribe(typeOfInterest => {
-        console.log(typeOfInterest);
         this.formGroup.controls.interest.setValue(typeOfInterest === this.typeOfInterest.Fijo ? this.minFixInterest : this.minVariableInterest, {emitEvent: false} )
       });
   }
 
   private listenValidation(): void {
     this.formGroup.valueChanges.pipe(takeUntil(this.destroyed$))
-    .subscribe(_ => this.viability = this.formGroup.valid);
+    .subscribe(form => {
+      this.viability = this.formGroup.valid && (form.savings < (form.price*0.8))
+      if (this.viability) {
+        this.total = this.calcTotalMortgage(form.price, form.savings, form.interest);
+        this.monthly = this.calcMonthlyMortgage(this.total, form.years);
+      } else {
+        this.monthly = 0;
+        this.total = 0;
+      }
+    });
   }
 
   checkInterest(): void {
@@ -88,6 +98,13 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroyed$.next();
     this.destroyed$.complete();
+  }
+
+  private calcTotalMortgage(housePrice: number, savings: number, interest: number): number {
+    return Math.round((housePrice - savings)*(interest))
+  }
+  private calcMonthlyMortgage(total: number, years: number) {
+    return Math.round((total/12)/years);
   }
 
 }

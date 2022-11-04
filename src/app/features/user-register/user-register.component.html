@@ -21,8 +21,9 @@
 
   <mat-checkbox class="my-1" formControlName="terms">He leído y acepto la
     <a href="https://express.oxperta.com/aviso-legal?hsLang=es-es" target="_blank" class="underline">política de privacidad</a>
+    <mat-error *ngIf="formGroup.touched && formGroup.controls.terms.invalid">Este campo es requerido</mat-error>
   </mat-checkbox>
 
   <mat-checkbox class="my-1" formControlName="publicity">Acepto recibir comunicaciones comerciales</mat-checkbox>
-
+  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold my-5 py-2 px-4 rounded-full">Te contactamos</button>
 </form>

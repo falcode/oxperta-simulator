@@ -10,12 +10,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { HttpClientModule } from '@angular/common/http';
 import { UserRegisterModule } from '../user-register/user-register.module';
+import { MortgagePaymentsComponent } from './components/mortgage-payments/mortgage-payments.component';
 
 
 
 @NgModule({
   declarations: [
-    MortgageSimulatorComponent
+    MortgageSimulatorComponent,
+    MortgagePaymentsComponent
   ],
   imports: [
     CommonModule,

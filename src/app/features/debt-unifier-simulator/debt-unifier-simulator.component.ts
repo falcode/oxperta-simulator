@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ContractType} from "../../shared/consts/contract-type";
 import {map, Observable, startWith} from "rxjs";
-enum operationViability {
+export enum operationViability {
   Viable ,
   Complex,
   Impossible
@@ -18,6 +18,8 @@ export class DebtUnifierSimulatorComponent implements OnInit {
   actualStep = 1;
   operationViability = operationViability;
   viability = operationViability.Impossible;
+  monthly = 0;
+  total = 0;
   constructor() { }
 
   ngOnInit(): void {
@@ -56,6 +58,7 @@ export class DebtUnifierSimulatorComponent implements OnInit {
   stepForward(): void {
     if (this.actualStep === 3) {
       this.calcOperation();
+      console.log(this.viability);
     }
     this.actualStep++;
   }

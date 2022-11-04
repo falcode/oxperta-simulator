@@ -1,62 +1,61 @@
-<div class="flex w-full desktop:flex-row mobile:flex-col pt-10 space-x-5 px-5">
-<form [formGroup]="formGroup" class="flex desktop:w-1/2 mobile:w-full flex-column">
-  <mat-form-field appearance="fill">
-    <p class="mat-form-field-title font-hint">Provincia</p>
-    <input type="text"
-           matInput
-           formControlName="provinces"
-           [matAutocomplete]="auto">
-    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-      <mat-option *ngFor="let province of filteredProvinces | async" [value]="province">
-        {{province}}
-      </mat-option>
-    </mat-autocomplete>
-    <mat-error>Este campo es requerido</mat-error>
-  </mat-form-field>
-
-
-  <mat-form-field >
-    <p class="mat-form-field-title font-hint">Precio del inmueble</p>
-    <input formControlName="price" matInput mask="separator" thousandSeparator="." placeholder="Ej: 150.000€">
-    <span matSuffix>€</span>
-    <mat-error>Este campo es requerido</mat-error>
-  </mat-form-field>
-
-  <mat-form-field >
-    <p class="mat-form-field-title font-hint">Ahorro aportado</p>
-    <input formControlName="savings" matInput mask="separator" thousandSeparator="." placeholder="Ej: 40.000€">
-    <span matSuffix>€</span>
-    <mat-error>Este campo es requerido</mat-error>
-  </mat-form-field>
-
-  <mat-form-field >
-    <p class="mat-form-field-title font-hint">Años de hipoteca</p>
-    <input formControlName="years" matInput min="10" max="40" type="number">
-    <span matSuffix>años</span>
-    <mat-error *ngIf="formGroup.controls.years.hasError('required')">Este campo es requerido</mat-error>
-    <mat-error *ngIf="formGroup.controls.years.hasError('min')">Los años mínimos para una hipoteca son 10</mat-error>
-    <mat-error *ngIf="formGroup.controls.years.hasError('max')">Los años máximos para una hipoteca son 40</mat-error>
-  </mat-form-field>
-
-  <div>
-    <mat-form-field class="mid-width border-radius-right-none">
-      <p class="mat-form-field-title font-hint">Tipo de interés</p>
-      <mat-select formControlName="typeOfInterest">
-        <mat-option [value]="typeOfInterest.Fijo">{{typeOfInterest.Fijo}}</mat-option>
-        <mat-option [value]="typeOfInterest.Variable">{{typeOfInterest.Variable}}</mat-option>
-      </mat-select>
+<div class="flex w-full desktop:flex-row mobile:flex-col pt-10 desktop:space-x-5 mobile:space-y-5 px-5">
+  <form [formGroup]="formGroup" class="flex desktop:w-1/2 mobile:w-full flex-column">
+    <mat-form-field appearance="fill">
+      <p class="mat-form-field-title font-hint">Provincia</p>
+      <input type="text" matInput formControlName="provinces" [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let province of filteredProvinces | async" [value]="province">
+          {{province}}
+        </mat-option>
+      </mat-autocomplete>
       <mat-error>Este campo es requerido</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="mid-width border-radius-left-none">
-      <p class="mat-form-field-title font-hint">Tasa de interés anual</p>
-      <input formControlName="interest" matInput type="number" (focusout)="checkInterest()">
-      <span matSuffix>%</span>
-      <mat-error *ngIf="formGroup.controls.years.hasError('required')">Este campo es requerido</mat-error>
+
+    <mat-form-field>
+      <p class="mat-form-field-title font-hint">Precio del inmueble</p>
+      <input formControlName="price" matInput mask="separator" thousandSeparator="." placeholder="Ej: 150.000€">
+      <span matSuffix>€</span>
+      <mat-error>Este campo es requerido</mat-error>
     </mat-form-field>
+
+    <mat-form-field>
+      <p class="mat-form-field-title font-hint">Ahorro aportado</p>
+      <input formControlName="savings" matInput mask="separator" thousandSeparator="." placeholder="Ej: 40.000€">
+      <span matSuffix>€</span>
+      <mat-error>Este campo es requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <p class="mat-form-field-title font-hint">Años de hipoteca</p>
+      <input formControlName="years" matInput min="10" max="40" type="number">
+      <span matSuffix>años</span>
+      <mat-error *ngIf="formGroup.controls.years.hasError('required')">Este campo es requerido</mat-error>
+      <mat-error *ngIf="formGroup.controls.years.hasError('min')">Los años mínimos para una hipoteca son 10</mat-error>
+      <mat-error *ngIf="formGroup.controls.years.hasError('max')">Los años máximos para una hipoteca son 40</mat-error>
+    </mat-form-field>
+
+    <div>
+      <mat-form-field class="mid-width border-radius-right-none">
+        <p class="mat-form-field-title font-hint">Tipo de interés</p>
+        <mat-select formControlName="typeOfInterest">
+          <mat-option [value]="typeOfInterest.Fijo">{{typeOfInterest.Fijo}}</mat-option>
+          <mat-option [value]="typeOfInterest.Variable">{{typeOfInterest.Variable}}</mat-option>
+        </mat-select>
+        <mat-error>Este campo es requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="mid-width border-radius-left-none">
+        <p class="mat-form-field-title font-hint">Tasa de interés anual</p>
+        <input formControlName="interest" matInput type="number" (focusout)="checkInterest()">
+        <span matSuffix>%</span>
+        <mat-error *ngIf="formGroup.controls.years.hasError('required')">Este campo es requerido</mat-error>
+      </mat-form-field>
+    </div>
+
+  </form>
+  <div class="flex desktop:w-1/2 mobile:w-full flex-column">
+    <app-mortgage-payments [monthly]="monthly" [total]="total" [viability]="viability" ></app-mortgage-payments>
+    <app-user-register *ngIf="viability"></app-user-register>
   </div>
-
-</form>
-
-<app-user-register class="w-1/2" *ngIf="viability"></app-user-register>
 </div>

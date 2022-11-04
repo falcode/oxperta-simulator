@@ -9,12 +9,14 @@ import {MatInputModule} from "@angular/material/input";
 import {NgxMaskModule} from "ngx-mask";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import { UserRegisterModule } from '../user-register/user-register.module';
+import { DebtsPaymentsComponent } from './components/debts-payments/debts-payments.component';
 
 
 
 @NgModule({
   declarations: [
-    DebtUnifierSimulatorComponent
+    DebtUnifierSimulatorComponent,
+    DebtsPaymentsComponent
   ],
   imports: [
     CommonModule,
