@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  euribor: 'https://papa.asmalljob.com/webhook/1fa8609e-95ce-49bc-af72-d44b50139bd3'
+  euribor: 'https://interest-rate-by-api-ninjas.p.rapidapi.com/v1/interestrate?rapidapi-key=e7678d365emshbcfe3d4c402c3b3p1a0d9djsn1b0db02c4617'
 };
