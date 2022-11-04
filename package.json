@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "build:prod": "ng build --configuration production --aot",
+    "build:prod": "ng build --configuration production --aot --base-href=https://falcode.github.io/oxperta-simulator/",
     "test": "ng test"
   },
   "private": true,
