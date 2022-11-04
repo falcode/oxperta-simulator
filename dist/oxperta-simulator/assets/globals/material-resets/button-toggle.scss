@@ -1,0 +1,51 @@
+@use './../colors' as *;
+
+$button-toggle-height: 2rem;
+$box-shadow-container: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
+
+.mat-button-toggle-group {
+  border-radius: 0.5rem !important;
+  box-shadow: $box-shadow-container;
+  border: none;
+  background-color: $refy-white;
+  padding: 0.15rem;
+
+  &.disable {
+
+    &--box-shadow {
+      padding: 0;
+      border: 1px solid $refy-grey-100;
+      box-shadow: none !important;
+    }
+
+  }
+
+  .mat-button-toggle {
+    border-radius: 0.5rem;
+    border: none !important;
+    overflow: hidden;
+
+    .mat-button-toggle-label-content {
+      font-size: 14px;
+      font-weight: normal;
+      line-height: $button-toggle-height;
+      color: $refy-grey;
+      padding: 0 0.75rem;
+    }
+
+    &-checked {
+      background-color: $refy-color-primary;
+
+      .mat-button-toggle-label-content {
+        color: $refy-white;
+      }
+    }
+
+    &-disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+  }
+
+}

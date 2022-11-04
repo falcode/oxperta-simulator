@@ -1,0 +1,53 @@
+@use './../sizings' as *;
+@use './../colors' as *;
+@use './../animations' as *;
+
+$horizontal-padding: 1.5rem;
+$box-shadow-container: 0 2px 4px rgb(0 0 0 / 50%);
+
+.mat-snack-bar-container {
+  margin: 0 !important;
+  padding: 1.5rem !important;
+  max-width: none !important;
+  min-width: 100vw !important;
+  min-height: unset !important;
+  border-radius: 0 !important;
+  box-shadow: $box-shadow-container;
+  background-color: $refy-grey-1000;
+
+  /*
+  @media (max-width: $mobile-inner-width) {
+    width: calc(100vw - #{$horizontal-padding} * 2);
+  }
+
+  @media (min-width: $mobile-inner-width) {
+    width: calc(#{$mobile-inner-width} - #{$horizontal-padding} * 2);
+  }*/
+
+  .mat-simple-snackbar {
+
+    > span {
+      font-size: 16px;
+      line-height: 1.5rem;
+      font-weight: normal;
+      color: $refy-white;
+      padding-right: 0.5rem;
+    }
+
+    .mat-simple-snackbar-action {
+      margin: 0 !important;
+
+      .mat-focus-indicator {
+        font-size: 16px;
+
+        @media (min-width: $mobile-breakpoint) {
+          margin-right: 1rem;
+        }
+
+      }
+
+    }
+
+  }
+
+}
