@@ -23,7 +23,6 @@ export class DebtUnifierSimulatorComponent implements OnInit {
   years = 30;
   monthly = 0;
   total = 0;
-  constructor() { }
 
   ngOnInit(): void{
     this.initForm();
