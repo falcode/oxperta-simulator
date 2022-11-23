@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ContractType } from "../../shared/consts/contract-type";
 import { interest } from "../../shared/consts/interests";
 import { map, Observable, startWith } from "rxjs";
-import { EuriborService } from 'src/app/api/services/euribor.service';
 export enum operationViability {
   Viable,
   Complex,
@@ -21,15 +20,13 @@ export class DebtUnifierSimulatorComponent implements OnInit {
   operationViability = operationViability;
   viability = operationViability.Impossible;
   minFixInterest = interest.fixed
-  minVariableInterest = interest.variable
   years = 30;
   monthly = 0;
   total = 0;
-  constructor(private euriborService: EuriborService) { }
+  constructor() { }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void{
     this.initForm();
-    this.minVariableInterest += await this.euriborService.setEuribor();
   }
 
   private initForm(): void {
