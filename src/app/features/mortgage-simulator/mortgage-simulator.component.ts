@@ -1,7 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators } from '@angular/forms';
-import { map, Observable, startWith, Subject, takeUntil} from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { map, Observable, startWith, Subject, takeUntil } from 'rxjs';
 import { EuriborService } from 'src/app/api/services/euribor.service';
+import { interest } from 'src/app/shared/consts/interests';
 import { Provinces } from '../../shared/consts/provinces';
 enum typeOfInterest {
   Fijo = 'Fijo',
@@ -18,8 +19,8 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
   filteredProvinces: Observable<string[]>;
   formGroup: FormGroup;
   typeOfInterest = typeOfInterest;
-  minFixInterest = 1.15;
-  minVariableInterest = 0.45;
+  minFixInterest = interest.fixed
+  minVariableInterest = interest.variable
   viability = false;
   monthly: number = 0;
   total: number = 0;
@@ -63,22 +64,22 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
   private changeInterestListener(): void {
     this.formGroup.controls.typeOfInterest.valueChanges.pipe(takeUntil(this.destroyed$))
       .subscribe(typeOfInterest => {
-        this.formGroup.controls.interest.setValue(typeOfInterest === this.typeOfInterest.Fijo ? this.minFixInterest : this.minVariableInterest, {emitEvent: false} )
+        this.formGroup.controls.interest.setValue(typeOfInterest === this.typeOfInterest.Fijo ? this.minFixInterest : this.minVariableInterest, { emitEvent: false })
       });
   }
 
   private listenValidation(): void {
     this.formGroup.valueChanges.pipe(takeUntil(this.destroyed$))
-    .subscribe(form => {
-      this.viability = this.formGroup.valid && (form.savings < (form.price*0.8))
-      if (this.viability) {
-        this.total = this.calcTotalMortgage(form.price, form.savings, form.interest);
-        this.monthly = this.calcMonthlyMortgage(this.total, form.years);
-      } else {
-        this.monthly = 0;
-        this.total = 0;
-      }
-    });
+      .subscribe(form => {
+        this.viability = this.formGroup.valid && (form.savings < (form.price * 0.8))
+        if (this.viability) {
+          this.total = this.calcTotalMortgage(form.price, form.savings, form.interest);
+          this.monthly = this.calcMonthlyMortgage(this.total, form.years);
+        } else {
+          this.monthly = 0;
+          this.total = 0;
+        }
+      });
   }
 
   checkInterest(): void {
@@ -101,10 +102,10 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
   }
 
   private calcTotalMortgage(housePrice: number, savings: number, interest: number): number {
-    return Math.round((housePrice - savings)*(interest))
+    return Math.round((housePrice - savings) * (interest))
   }
   private calcMonthlyMortgage(total: number, years: number) {
-    return Math.round((total/12)/years);
+    return Math.round((total / 12) / years);
   }
 
 }

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ContractType} from "../../shared/consts/contract-type";
-import {map, Observable, startWith} from "rxjs";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { ContractType } from "../../shared/consts/contract-type";
+import { interest } from "../../shared/consts/interests";
+import { map, Observable, startWith } from "rxjs";
+import { EuriborService } from 'src/app/api/services/euribor.service';
 export enum operationViability {
-  Viable ,
+  Viable,
   Complex,
   Impossible
 }
@@ -18,12 +20,16 @@ export class DebtUnifierSimulatorComponent implements OnInit {
   actualStep = 1;
   operationViability = operationViability;
   viability = operationViability.Impossible;
+  minFixInterest = interest.fixed
+  minVariableInterest = interest.variable
+  years = 30;
   monthly = 0;
   total = 0;
-  constructor() { }
+  constructor(private euriborService: EuriborService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.initForm();
+    this.minVariableInterest += await this.euriborService.setEuribor();
   }
 
   private initForm(): void {
@@ -58,12 +64,21 @@ export class DebtUnifierSimulatorComponent implements OnInit {
   stepForward(): void {
     if (this.actualStep === 3) {
       this.calcOperation();
-      console.log(this.viability);
+    } else {
+      this.resetValues();
     }
     this.actualStep++;
   }
+
   stepBack(): void {
     this.actualStep--;
+    this.resetValues();
+  }
+
+  resetValues() {
+    this.viability = operationViability.Impossible;
+    this.monthly = 0;
+    this.total = 0;
   }
 
   private calcOperation(): void {
@@ -107,6 +122,13 @@ export class DebtUnifierSimulatorComponent implements OnInit {
       return;
     }
 
+    this.calcValues(totalDebt);
+
+  }
+
+  private calcValues(totalDebt: number): void {
+    this.total = Math.round(totalDebt * this.minFixInterest)
+    this.monthly = Math.round((this.total / 12) / this.years);
   }
 
 }

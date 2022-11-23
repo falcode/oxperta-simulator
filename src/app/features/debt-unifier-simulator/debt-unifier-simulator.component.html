@@ -76,9 +76,9 @@
 
     <div class="flex items-center justify-center w-full py-10 flex-column" *ngIf="actualStep === 4">
       <ng-container [ngSwitch]="viability">
-        <ng-container *ngSwitchCase="operationViability.Viable">Viable 👍</ng-container>
-        <ng-container *ngSwitchCase="operationViability.Complex">Complex ⚠️</ng-container>
-        <ng-container *ngSwitchCase="operationViability.Impossible">Impossible 🚫</ng-container>
+        <ng-container *ngSwitchCase="operationViability.Viable">La operación es viable 👍</ng-container>
+        <ng-container *ngSwitchCase="operationViability.Complex">La operación puede ser compleja pero te ayudaremos ⚠️</ng-container>
+        <ng-container *ngSwitchCase="operationViability.Impossible">La operación es imposible de realizar 🚫</ng-container>
       </ng-container>
     </div>
 
