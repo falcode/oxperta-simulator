@@ -73,8 +73,7 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
       .subscribe(form => {
         this.viability = this.formGroup.valid && (form.savings < (form.price * 0.8))
         if (this.viability) {
-          this.total = this.calcTotalMortgage(form.price, form.savings, form.interest);
-          this.monthly = this.calcMonthlyMortgage(this.total, form.years);
+          this.calcTotalMortgage(form.price, form.savings, form.years, form.interest);
         } else {
           this.monthly = 0;
           this.total = 0;
@@ -101,11 +100,11 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 
-  private calcTotalMortgage(housePrice: number, savings: number, interest: number): number {
-    return Math.round((housePrice - savings) * (interest))
+  private calcTotalMortgage(housePrice: number, savings: number, years: number, interest: number): void {
+    const months = years * 12;
+    const monthlyInterest = (interest / 100) / 12;
+    const actualValue = (housePrice - savings);
+    this.monthly = Math.round((actualValue * monthlyInterest) / ( 1 - Math.pow(( 1 + monthlyInterest ), -months) ));
+    this.total = Math.round(this.monthly * months);
   }
-  private calcMonthlyMortgage(total: number, years: number) {
-    return Math.round((total / 12) / years);
-  }
-
 }

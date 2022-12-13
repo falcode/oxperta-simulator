@@ -118,13 +118,16 @@ export class DebtUnifierSimulatorComponent implements OnInit {
       return;
     }
 
-    this.calcValues(totalDebt);
+    this.calcTotalMortgage(formControl.leftMortgage.value, formControl.monthlyMortgage.value, formControl.leftDebts.value, formControl.monthlyDebts.value);
 
   }
 
-  private calcValues(totalDebt: number): void {
-    this.total = Math.round(totalDebt * this.minFixInterest)
-    this.monthly = Math.round((this.total / 12) / this.years);
+  private calcTotalMortgage(leftMortgage: number, monthlyMortgage: number, leftDebts: number, monthlyDebts: number): void {
+    const months = Math.floor(Math.max(leftMortgage/monthlyMortgage, leftDebts/monthlyDebts));
+    const monthlyInterest = (this.minFixInterest / 100) / 12;
+    const actualValue = (leftMortgage + leftDebts);
+    this.monthly = Math.round((actualValue * monthlyInterest) / ( 1 - Math.pow(( 1 + monthlyInterest ), -months) ));
+    this.total = Math.round(this.monthly * months);
   }
 
 }
