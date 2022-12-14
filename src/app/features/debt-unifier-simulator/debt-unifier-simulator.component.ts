@@ -22,6 +22,7 @@ export class DebtUnifierSimulatorComponent implements OnInit {
   minFixInterest = interest.fixed
   years = 30;
   monthly = 0;
+  oldMonthly = 0;
   total = 0;
 
   ngOnInit(): void{
@@ -73,6 +74,7 @@ export class DebtUnifierSimulatorComponent implements OnInit {
 
   resetValues() {
     this.viability = operationViability.Impossible;
+    this.oldMonthly = 0
     this.monthly = 0;
     this.total = 0;
   }
@@ -126,8 +128,9 @@ export class DebtUnifierSimulatorComponent implements OnInit {
     const months = Math.floor(Math.max(leftMortgage/monthlyMortgage, leftDebts/monthlyDebts));
     const monthlyInterest = (this.minFixInterest / 100) / 12;
     const actualValue = (leftMortgage + leftDebts);
+    this.oldMonthly = Math.round(monthlyMortgage + monthlyDebts);
     this.monthly = Math.round((actualValue * monthlyInterest) / ( 1 - Math.pow(( 1 + monthlyInterest ), -months) ));
-    this.total = Math.round(this.monthly * months);
+    this.total = Math.round(this.oldMonthly - this.monthly);
   }
 
 }

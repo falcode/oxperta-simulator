@@ -11,6 +11,7 @@ export class DebtsPaymentsComponent {
   operationViability = operationViability;
   @Input() viability = operationViability.Impossible;
   @Input() monthly: number = 0;
+  @Input() oldMonthly: number = 0;
   @Input() total: number = 0;
 
   constructor() { }

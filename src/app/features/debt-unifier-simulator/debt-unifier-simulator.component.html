@@ -91,7 +91,7 @@
   </form>
 
   <div class="flex desktop:w-1/2 mobile:w-full flex-column">
-    <app-debts-payments [monthly]="monthly" [total]="total" [viability]="viability"></app-debts-payments>
+    <app-debts-payments [monthly]="monthly" [total]="total" [viability]="viability" [oldMonthly]="oldMonthly"></app-debts-payments>
     <app-user-register *ngIf="(viability !== operationViability.Impossible) && (actualStep === 4)">
     </app-user-register>
   </div>

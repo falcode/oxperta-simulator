@@ -105,6 +105,6 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
     const monthlyInterest = (interest / 100) / 12;
     const actualValue = (housePrice - savings);
     this.monthly = Math.round((actualValue * monthlyInterest) / ( 1 - Math.pow(( 1 + monthlyInterest ), -months) ));
-    this.total = Math.round(this.monthly * months);
+    this.total = Math.round(housePrice - savings);
   }
 }
