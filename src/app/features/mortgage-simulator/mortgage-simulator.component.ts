@@ -21,6 +21,7 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
   typeOfInterest = typeOfInterest;
   minFixInterest = interest.fixed
   minVariableInterest = interest.variable
+  euribor = 0;
   viability = false;
   monthly: number = 0;
   total: number = 0;
@@ -43,9 +44,9 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
       interest: new FormControl(this.minFixInterest, [Validators.required]),
     };
     this.formGroup = new FormGroup(controls);
-    this.minVariableInterest += await this.euriborService.setEuribor();
+    this.euribor = await this.euriborService.setEuribor();
     this.filterProvincesListener();
-    this.changeInterestListener();
+    // this.changeInterestListener();
     this.listenValidation();
   }
 
@@ -61,12 +62,12 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
     return this.provinces.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  private changeInterestListener(): void {
-    this.formGroup.controls.typeOfInterest.valueChanges.pipe(takeUntil(this.destroyed$))
-      .subscribe(typeOfInterest => {
-        this.formGroup.controls.interest.setValue(typeOfInterest === this.typeOfInterest.Fijo ? this.minFixInterest : this.minVariableInterest, { emitEvent: false })
-      });
-  }
+  // private changeInterestListener(): void {
+  //   this.formGroup.controls.typeOfInterest.valueChanges.pipe(takeUntil(this.destroyed$))
+  //     .subscribe(typeOfInterest => {
+  //       this.formGroup.controls.interest.setValue(typeOfInterest === this.typeOfInterest.Fijo ? this.minFixInterest : this.minVariableInterest, { emitEvent: false })
+  //     });
+  // }
 
   private listenValidation(): void {
     this.formGroup.valueChanges.pipe(takeUntil(this.destroyed$))
@@ -82,17 +83,19 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
   }
 
   checkInterest(): void {
-    const interest = this.formGroup.controls.interest.value;
-    const typeOfInterest = this.formGroup.controls.typeOfInterest.value;
-    if (typeOfInterest === this.typeOfInterest.Fijo) {
-      if (interest < this.minFixInterest) {
-        this.formGroup.controls.interest.setValue(this.minFixInterest)
-      }
-    } else {
-      if (interest < this.minVariableInterest) {
-        this.formGroup.controls.interest.setValue(this.minVariableInterest)
-      }
-    }
+    // const interest = this.formGroup.controls.interest.value;
+    // const typeOfInterest = this.formGroup.controls.typeOfInterest.value;
+    this.formGroup.controls.interest.setValue(this.minFixInterest)
+
+    // if (typeOfInterest === this.typeOfInterest.Fijo) {
+    //   if (interest < this.minFixInterest) {
+    //     this.formGroup.controls.interest.setValue(this.minFixInterest)
+    //   }
+    // } else {
+    //   if (interest < this.minVariableInterest) {
+    //     this.formGroup.controls.interest.setValue(this.minVariableInterest)
+    //   }
+    // }
   }
 
   ngOnDestroy(): void {
@@ -102,9 +105,13 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
 
   private calcTotalMortgage(housePrice: number, savings: number, years: number, interest: number): void {
     const months = years * 12;
-    const monthlyInterest = (interest / 100) / 12;
+    let interestToCalc = interest;
+    if (this.formGroup.controls.typeOfInterest.value === this.typeOfInterest.Variable) {
+      interestToCalc += this.euribor;
+    }
+    const monthlyInterest = (interestToCalc / 100) / 12;
     const actualValue = (housePrice - savings);
-    this.monthly = Math.round((actualValue * monthlyInterest) / ( 1 - Math.pow(( 1 + monthlyInterest ), -months) ));
+    this.monthly = Math.round((actualValue * monthlyInterest) / (1 - Math.pow((1 + monthlyInterest), -months)));
     this.total = Math.round(housePrice - savings);
   }
 }

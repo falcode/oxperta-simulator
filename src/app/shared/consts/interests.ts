@@ -1,4 +1,4 @@
 export const interest = {
-    fixed: 1.50,
-    variable: 0.45
+    fixed: 2,
+    variable: 2
 }

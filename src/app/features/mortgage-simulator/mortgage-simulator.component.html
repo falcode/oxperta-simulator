@@ -51,6 +51,8 @@
         <span matSuffix>%</span>
         <mat-error *ngIf="formGroup.controls.years.hasError('required')">Este campo es requerido</mat-error>
       </mat-form-field>
+      <p *ngIf="formGroup.controls.typeOfInterest.value === typeOfInterest.Variable">* Introduce el valor diferencial del euribor y el simulador lo calculará de manera automática.</p>
+
     </div>
 
   </form>
