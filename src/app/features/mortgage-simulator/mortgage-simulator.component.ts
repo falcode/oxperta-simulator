@@ -46,7 +46,7 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
     this.formGroup = new FormGroup(controls);
     this.euribor = await this.euriborService.setEuribor();
     this.filterProvincesListener();
-    // this.changeInterestListener();
+    this.changeInterestListener();
     this.listenValidation();
   }
 
@@ -62,12 +62,12 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
     return this.provinces.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  // private changeInterestListener(): void {
-  //   this.formGroup.controls.typeOfInterest.valueChanges.pipe(takeUntil(this.destroyed$))
-  //     .subscribe(typeOfInterest => {
-  //       this.formGroup.controls.interest.setValue(typeOfInterest === this.typeOfInterest.Fijo ? this.minFixInterest : this.minVariableInterest, { emitEvent: false })
-  //     });
-  // }
+  private changeInterestListener(): void {
+    this.formGroup.controls.typeOfInterest.valueChanges.pipe(takeUntil(this.destroyed$))
+      .subscribe(typeOfInterest => {
+        this.formGroup.controls.interest.setValue(typeOfInterest === this.typeOfInterest.Fijo ? this.minFixInterest : this.minVariableInterest, { emitEvent: false })
+      });
+  }
 
   private listenValidation(): void {
     this.formGroup.valueChanges.pipe(takeUntil(this.destroyed$))
@@ -83,19 +83,18 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
   }
 
   checkInterest(): void {
-    // const interest = this.formGroup.controls.interest.value;
-    // const typeOfInterest = this.formGroup.controls.typeOfInterest.value;
-    this.formGroup.controls.interest.setValue(this.minFixInterest)
+    const interest = this.formGroup.controls.interest.value;
+    const typeOfInterest = this.formGroup.controls.typeOfInterest.value;
 
-    // if (typeOfInterest === this.typeOfInterest.Fijo) {
-    //   if (interest < this.minFixInterest) {
-    //     this.formGroup.controls.interest.setValue(this.minFixInterest)
-    //   }
-    // } else {
-    //   if (interest < this.minVariableInterest) {
-    //     this.formGroup.controls.interest.setValue(this.minVariableInterest)
-    //   }
-    // }
+    if (typeOfInterest === this.typeOfInterest.Fijo) {
+      if (interest < this.minFixInterest) {
+        this.formGroup.controls.interest.setValue(this.minFixInterest)
+      }
+    } else {
+      if (interest < this.minVariableInterest) {
+        this.formGroup.controls.interest.setValue(this.minVariableInterest)
+      }
+    }
   }
 
   ngOnDestroy(): void {
