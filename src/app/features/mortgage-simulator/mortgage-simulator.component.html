@@ -57,7 +57,7 @@
 
   </form>
   <div class="flex desktop:w-1/2 mobile:w-full flex-column">
-    <app-mortgage-payments [monthly]="monthly" [total]="total" [viability]="viability" ></app-mortgage-payments>
+    <app-mortgage-payments [monthly]="monthly" [total]="total" [viability]="viability" [interest]="interest"></app-mortgage-payments>
     <app-user-register *ngIf="viability"></app-user-register>
   </div>
 </div>

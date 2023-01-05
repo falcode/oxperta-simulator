@@ -25,6 +25,7 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
   viability = false;
   monthly: number = 0;
   total: number = 0;
+  interest: string = '';
 
   private destroyed$ = new Subject<void>();
 
@@ -107,6 +108,9 @@ export class MortgageSimulatorComponent implements OnInit, OnDestroy {
     let interestToCalc = interest;
     if (this.formGroup.controls.typeOfInterest.value === this.typeOfInterest.Variable) {
       interestToCalc += this.euribor;
+      this.interest = ((interestToCalc / 100) * 100).toFixed(2);
+    } else {
+      this.interest = '';
     }
     const monthlyInterest = (interestToCalc / 100) / 12;
     const actualValue = (housePrice - savings);

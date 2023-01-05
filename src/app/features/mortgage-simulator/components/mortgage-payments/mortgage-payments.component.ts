@@ -9,6 +9,7 @@ export class MortgagePaymentsComponent {
 
   @Input() viability = false;
   @Input() monthly: number = 0;
+  @Input() interest: string = '';
   @Input() total: number = 0;
 
   constructor() { }
