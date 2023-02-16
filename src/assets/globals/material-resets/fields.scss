@@ -1,4 +1,5 @@
 @use './../colors' as *;
+@use './../oxpertaBrand' as *;
 
 $field-color: $refy-grey-1000;
 $disabled-field-color: $refy-text-grey;
@@ -52,6 +53,7 @@ form {
   margin: 0.5rem 0;
 
   .mat-form-field-wrapper {
+    $refy-grey-100: $bs-cuarto;
     height: 100%;
     border-radius: 0.5rem;
     border: 1px solid $refy-grey-100;
@@ -179,12 +181,6 @@ form {
     }
 
     &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-      color: $refy-text-soft-grey !important;
-      -webkit-text-fill-color: $refy-text-soft-grey !important;
-      opacity: 1;
-    }
-
-    &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
       color: $refy-text-soft-grey !important;
       -webkit-text-fill-color: $refy-text-soft-grey !important;
       opacity: 1;
