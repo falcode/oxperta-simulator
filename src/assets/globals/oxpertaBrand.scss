@@ -1,0 +1,29 @@
+$bs-primary: #3573fc;
+$bs-secondary: #f4b13e;
+$bs-tertiary: #003793;
+$bs-cuarto: #4eb0f9;
+$bs-dark: #253364;
+$bs-primary-desat: #4eb0f9;
+
+
+
+.primary-bottons{
+ background:$bs-primary;
+ color:white!important;
+    &:hover{
+    background:$bs-tertiary;
+    }
+}
+
+.btn-primary{
+  background:$bs-primary;
+  color:white!important;
+     &:hover{
+     background:$bs-secondary;
+     }
+
+}
+
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background{
+  background:$bs-cuarto;
+}
